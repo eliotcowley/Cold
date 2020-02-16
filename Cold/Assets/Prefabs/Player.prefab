@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1068235651
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1068235652}
+  m_Layer: 0
+  m_Name: Raycast
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1068235652
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1068235651}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.071, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2851365772863920871}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2851365772864028731
 GameObject:
   m_ObjectHideFlags: 0
@@ -2298,6 +2328,7 @@ GameObject:
   - component: {fileID: 2851365772864078631}
   - component: {fileID: 2851365772864078628}
   - component: {fileID: 2851365772864078626}
+  - component: {fileID: 1637269869}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2322,6 +2353,7 @@ Transform:
   - {fileID: 2851365772863965157}
   - {fileID: 2851365772863868281}
   - {fileID: 2851365772863870759}
+  - {fileID: 1068235652}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2391,6 +2423,21 @@ MonoBehaviour:
   moveSmooth: 10
   moveThreshold: 0.05
   fallThreshold: -0.1
+  stopSmooth: 2.5
+--- !u!114 &1637269869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2851365772864226111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfd5a5f87d85e4f49b6e9987c76c2cfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 1
+  raycastObject: {fileID: 1068235652}
 --- !u!1 &2851365772864233727
 GameObject:
   m_ObjectHideFlags: 0
