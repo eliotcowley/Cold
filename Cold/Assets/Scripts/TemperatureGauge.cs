@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(PlayerDie))]
 public class TemperatureGauge : MonoBehaviour
 {
     [SerializeField]
@@ -16,10 +17,12 @@ public class TemperatureGauge : MonoBehaviour
 
     private float temperature;
     private float timer = 0f;
+    private PlayerDie playerDie;
 
     private void Start()
     {
         this.temperature = this.temperatureMax;
+        this.playerDie = GetComponent<PlayerDie>();
     }
 
     private void Update()
@@ -33,5 +36,10 @@ public class TemperatureGauge : MonoBehaviour
         }
 
         this.temperatureFillImage.fillAmount = this.temperature / this.temperatureMax;
+
+        if (this.temperature <= 0f)
+        {
+            this.playerDie.Die();
+        }
     }
 }

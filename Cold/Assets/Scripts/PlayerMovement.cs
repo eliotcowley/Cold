@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class PlayerMovement : MonoBehaviour
 {
+    public bool CanMove = true;
+
     [SerializeField]
     private float moveSpeed = 10f;
 
@@ -36,8 +38,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //float horizontal = GameController.Instance.IsPaused ? 0f : Input.GetAxis(Constants.Input_Horizontal) * Time.fixedDeltaTime * moveSpeed;
-        //float vertical = GameController.Instance.IsPaused ? 0f : Input.GetAxis(Constants.Input_Vertical) * Time.fixedDeltaTime * moveSpeed;
+        if (!this.CanMove)
+        {
+            return;
+        }
 
         float horizontal = Input.GetAxis(Constants.Input_Horizontal) * Time.fixedDeltaTime * this.moveSpeed;
         float vertical = Input.GetAxis(Constants.Input_Vertical) * Time.fixedDeltaTime * this.moveSpeed;
