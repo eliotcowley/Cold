@@ -19,4 +19,7 @@ public class Constants
 
     // Layers
     public static string Layer_Interactable = "Interactable";
+
+    // Tags
+    public static string Tag_Player = "Player";
 }
