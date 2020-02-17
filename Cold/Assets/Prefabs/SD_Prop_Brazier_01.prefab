@@ -4710,8 +4710,8 @@ GameObject:
   - component: {fileID: 3506300007136677134}
   - component: {fileID: 3506300007135625292}
   - component: {fileID: 3506300007147299704}
-  - component: {fileID: 3480510312828701248}
   - component: {fileID: 3506300007137927020}
+  - component: {fileID: 4084441969763751413}
   m_Layer: 0
   m_Name: SD_Prop_Brazier_01
   m_TagString: Untagged
@@ -4799,20 +4799,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!64 &3480510312828701248
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3506300007137832382}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 43685440391582866, guid: f440b396d81e14043b26ca2002bacf1f, type: 2}
 --- !u!65 &3506300007137927020
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4825,6 +4811,19 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.98446894, y: 1.7433699, z: 0.9817174}
+  m_Center: {x: 0, y: 0.87168497, z: 0}
+--- !u!135 &4084441969763751413
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3506300007137832382}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.87168497
   m_Center: {x: 0, y: 0.87168497, z: 0}
 --- !u!1 &3506300007919772268
 GameObject:

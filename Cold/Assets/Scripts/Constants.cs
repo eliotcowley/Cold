@@ -15,6 +15,7 @@ public class Constants
     public static string Anim_Switch = "Switch";
     public static string Anim_JailCellDoorMoveDown = "MoveDown";
     public static string Anim_PlayerDead = "Dead";
+    public static string Anim_VignetteFadeIn = "VignetteFadeIn";
 
     // Layers
     public static string Layer_Interactable = "Interactable";

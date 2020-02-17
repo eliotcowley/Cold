@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering.PostProcessing;
 
 [RequireComponent(typeof(PlayerDie))]
 public class TemperatureGauge : MonoBehaviour
@@ -15,9 +16,16 @@ public class TemperatureGauge : MonoBehaviour
     [SerializeField]
     private Image temperatureFillImage;
 
+    [SerializeField]
+    private float lowTemperatureThreshold = 20f;
+
+    [SerializeField]
+    private Animator postProcessAnimator;
+
     private float temperature;
     private float timer = 0f;
     private PlayerDie playerDie;
+    private bool lowTemp = false;
 
     private void Start()
     {
@@ -40,6 +48,15 @@ public class TemperatureGauge : MonoBehaviour
         if (this.temperature <= 0f)
         {
             this.playerDie.Die();
+        }
+
+        if (!this.lowTemp)
+        {
+            if (this.temperature <= this.lowTemperatureThreshold)
+            {
+                this.lowTemp = true;
+                this.postProcessAnimator.SetTrigger(Constants.Anim_VignetteFadeIn);
+            }
         }
     }
 }
