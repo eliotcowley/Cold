@@ -15,11 +15,17 @@ public class Constants
     public static string Anim_Switch = "Switch";
     public static string Anim_JailCellDoorMoveDown = "MoveDown";
     public static string Anim_PlayerDead = "Dead";
-    public static string Anim_VignetteFadeIn = "VignetteFadeIn";
+    public static string Anim_TemperatureLow = "TemperatureLow";
+    public static string Anim_TextFade = "FadeIn";
+    public static string Anim_ImageFade = "ImageFade";
 
     // Layers
     public static string Layer_Interactable = "Interactable";
+    public static string Layer_Ground = "Ground";
 
     // Tags
     public static string Tag_Player = "Player";
+
+    // Misc
+    public static float SecondsTillFadeOut = 3f;
 }

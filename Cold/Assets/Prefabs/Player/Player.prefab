@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1068235652}
   m_Layer: 0
-  m_Name: Raycast
+  m_Name: RaycastInteraction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,6 +30,36 @@ Transform:
   m_Father: {fileID: 2851365772863920871}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1761217176
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1761217177}
+  m_Layer: 0
+  m_Name: RaycastFeet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1761217177
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1761217176}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -0, z: 0.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2851365772863920871}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &2851365772864028731
 GameObject:
   m_ObjectHideFlags: 0
@@ -2329,9 +2359,11 @@ GameObject:
   - component: {fileID: 2851365772864078628}
   - component: {fileID: 2851365772864078626}
   - component: {fileID: 1637269869}
+  - component: {fileID: 9201528227122540017}
+  - component: {fileID: 1637269870}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2354,6 +2386,7 @@ Transform:
   - {fileID: 2851365772863868281}
   - {fileID: 2851365772863870759}
   - {fileID: 1068235652}
+  - {fileID: 1761217177}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2418,12 +2451,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b09a1e70e8738a847bfb4ba2fd783584, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanMove: 1
   moveSpeed: 70
   turnSpeed: 1
   moveSmooth: 10
   moveThreshold: 0.05
-  fallThreshold: -0.1
+  fallThreshold: -2
   stopSmooth: 2.5
+  raycastFeet: {fileID: 1761217177}
+  verticalStepDistance: 0.2
 --- !u!114 &1637269869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2436,8 +2472,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfd5a5f87d85e4f49b6e9987c76c2cfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDistance: 1
+  maxDistance: 2
   raycastObject: {fileID: 1068235652}
+--- !u!114 &9201528227122540017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2851365772864226111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e666c7ffaa3ddd459c6c0c193aad8be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NearFire: 0
+  HasDied: 0
+  temperatureMax: 100
+  temperatureDecreaseSpeedSeconds: 1
+  temperatureIncreaseSpeedSeconds: 0.1
+  temperatureFillImage: {fileID: 0}
+  lowTemperatureThreshold: 20
+  postProcessAnimator: {fileID: 0}
+--- !u!114 &1637269870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2851365772864226111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0d3128b4dd8d7044addd7eb81a2d961, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  secondsTillFade: 3
 --- !u!1 &2851365772864233727
 GameObject:
   m_ObjectHideFlags: 0
