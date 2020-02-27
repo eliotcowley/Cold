@@ -27,27 +27,34 @@ public class PlayerMovement : MonoBehaviour
     private float stopSmooth = 2.5f;
 
     [SerializeField]
-    private Transform raycastFeet;
+    private float height = 0.5f;
 
     [SerializeField]
-    private float verticalStepDistance;
+    private LayerMask ground;
+
+    [SerializeField]
+    private float slopeForce;
+
+    [SerializeField]
+    private float slopeForceRayLength;
+
+    [SerializeField]
+    private Transform raycastFeet;
 
     private Rigidbody rb;
     private Animator animator;
     private Vector3 velocity = Vector3.zero;
-    private int feetRayLayerMask;
+    private float groundAngle;
+    private bool grounded;
 
     private void Start()
     {
         this.rb = GetComponent<Rigidbody>();
         this.animator = GetComponent<Animator>();
-        this.feetRayLayerMask = 1 << LayerMask.NameToLayer(Constants.Layer_Ground);
     }
 
     private void FixedUpdate()
     {
-        bool grounded = false;
-
         if (!this.CanMove)
         {
             return;
@@ -65,34 +72,58 @@ public class PlayerMovement : MonoBehaviour
             targetRotation = Quaternion.LookRotation(moveVector, Vector3.up);
         }
 
+        if (Physics.Raycast(
+            this.raycastFeet.position,
+            Vector3.down,
+            out RaycastHit hitInfo,
+            this.height,
+            this.ground))
+        {
+            Debug.DrawLine(this.raycastFeet.position, hitInfo.point, Color.red);
+            this.grounded = true;
+        }
+        else
+        {
+            this.grounded = false;
+        }
+
         if (moveVector.sqrMagnitude > this.moveThreshold)
         {
             Vector3 smoothedPosition = Vector3.SmoothDamp(this.rb.position, targetVector, ref this.velocity, this.moveSmooth * Time.fixedDeltaTime);
             this.rb.rotation = Quaternion.Lerp(this.rb.rotation, targetRotation, this.moveSmooth * this.turnSpeed * Time.fixedDeltaTime);
-            this.rb.position = smoothedPosition;
+            Vector3 slopePos = Vector3.zero;
 
-            if (Physics.Raycast(
-                this.raycastFeet.position,
-                this.raycastFeet.TransformDirection(Vector3.forward),
-                out RaycastHit raycastHit,
-                this.verticalStepDistance,
-                this.feetRayLayerMask))
+            if (OnSlope())
             {
-                Debug.DrawRay(this.raycastFeet.position, this.raycastFeet.TransformDirection(Vector3.forward) * raycastHit.distance, Color.yellow);
-                this.rb.position = new Vector3(this.rb.position.x, raycastHit.point.y, this.rb.position.z);
-                grounded = true;
+                slopePos = Vector3.down * this.height * this.slopeForce * Time.fixedDeltaTime;
             }
+
+            this.rb.position = smoothedPosition + slopePos;
         }
         else
         {
             this.velocity = Vector3.SmoothDamp(this.velocity, Vector3.zero, ref this.velocity, this.stopSmooth * Time.fixedDeltaTime);
         }
-        
-        this.animator.SetFloat(Constants.Anim_Speed, this.velocity.sqrMagnitude);
 
-        if (!grounded)
+        
+
+        this.animator.SetFloat(Constants.Anim_Speed, this.velocity.sqrMagnitude);
+        //this.animator.SetBool(Constants.Anim_Grounded, (this.rb.velocity.y < this.fallThreshold) ? false : true);
+        this.animator.SetBool(Constants.Anim_Grounded, this.grounded);
+    }
+
+    private bool OnSlope()
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(this.rb.position, Vector3.down, out hit, this.height * this.slopeForceRayLength))
         {
-            this.animator.SetBool(Constants.Anim_Grounded, (this.rb.velocity.y < this.fallThreshold) ? false : true);
+            if (hit.normal != Vector3.up)
+            {
+                return true;
+            }
         }
+
+        return false;
     }
 }
